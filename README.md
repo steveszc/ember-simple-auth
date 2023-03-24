@@ -32,16 +32,34 @@ authorization mechanisms__.
 
 **Core Feature Guides**
 
-* [The Session Service](#the-session-service)
-* [Authenticators](#authenticators)
-  * [Customizing an Authenticator](#customizing-an-authenticator)
-  * [Implementing a custom Authenticator](#implementing-a-custom-authenticator)
-* [Session Stores](#session-stores)
-  * [Store Types](#store-types)
-  * [Implementing a Custom Store](#implementing-a-custom-store)
-* [FastBoot](#fastboot)
-* [Engines](#engines)
-* [Testing](#testing)
+- [Ember Simple Auth](#ember-simple-auth)
+- [Table of Contents](#table-of-contents)
+  - [What does it do?](#what-does-it-do)
+  - [How does it work?](#how-does-it-work)
+  - [Example App](#example-app)
+  - [Installation](#installation)
+    - [TypeScript setup](#typescript-setup)
+    - [Upgrading from a pre-3.0 release?](#upgrading-from-a-pre-30-release)
+    - [Upgrading to 4.0 release?](#upgrading-to-40-release)
+  - [Walkthrough](#walkthrough)
+  - [The Session Service](#the-session-service)
+  - [Authenticators](#authenticators)
+    - [Customizing an Authenticator](#customizing-an-authenticator)
+    - [Implementing a custom Authenticator](#implementing-a-custom-authenticator)
+  - [Session Stores](#session-stores)
+    - [Store Types](#store-types)
+      - [Adaptive Store](#adaptive-store)
+      - [`localStorage` Store](#localstorage-store)
+      - [Cookie Store](#cookie-store)
+      - [`sessionStorage` Store](#sessionstorage-store)
+      - [Ephemeral Store](#ephemeral-store)
+    - [Customizing the Store](#customizing-the-store)
+    - [Implementing a custom Store](#implementing-a-custom-store)
+  - [FastBoot](#fastboot)
+  - [Engines](#engines)
+  - [Testing](#testing)
+  - [Other guides](#other-guides)
+  - [License](#license)
 
 **Other Guides**
 
@@ -106,6 +124,26 @@ Installing the library is as easy as:
 ```bash
 ember install ember-simple-auth
 ```
+
+### TypeScript setup
+1. Include `ember-cli-flash` typescript defs in the `tsconfig.json` under `paths` like this:
+   ```
+    "paths: {
+      "ember-simple-auth/*": [
+        "node_modules/ember-simple-auth"
+      ],
+    }
+   ```
+2. Import the definition for the type that you need where you need it. For eg: If you have a `session-auth.js` service that uses the `session` service offered by `ember-simple-auth`, you can import the typescript definition for it and use it like this:
+   <br /> <b>session-auth.js</b>
+   ```
+    import { inject as service } from '@ember/service';
+    import Session from 'ember-simple-auth/services/session';
+
+    export default class SessionAuthService extends Service {
+      @service declare session: Session<{}>
+    }
+   ```
 
 ### Upgrading from a pre-3.0 release?
 
