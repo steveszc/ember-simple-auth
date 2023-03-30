@@ -108,7 +108,7 @@ ember install ember-simple-auth
 ```
 
 ### TypeScript setup
-1. Include `ember-cli-flash` typescript defs in the `tsconfig.json` under `paths` like this:
+1. Include `ember-simple-auth` typescript defs in the `tsconfig.json` under `paths` like this:
    ```
     "paths: {
       "ember-simple-auth/*": [
@@ -116,11 +116,11 @@ ember install ember-simple-auth
       ],
     }
    ```
-2. Import the definition for the type that you need where you need it. For eg: If you have a `session-auth.js` service that uses the `session` service offered by `ember-simple-auth`, you can import the typescript definition for it and use it like this:
+2. Import the definition for the type that you need where you need it. For eg: If you have a `session-auth.ts` service that uses the `session` service offered by `ember-simple-auth`, you can import the typescript definition for it and use it like this:
    <br /> <b>session-auth.js</b>
    ```
     import { inject as service } from '@ember/service';
-    import Session from 'ember-simple-auth/services/session';
+    import type Session from 'ember-simple-auth/services/session';
 
     export default class SessionAuthService extends Service {
       @service declare session: Session<{}>
