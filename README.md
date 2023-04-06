@@ -107,6 +107,31 @@ Installing the library is as easy as:
 ember install ember-simple-auth
 ```
 
+### TypeScript setup
+1. Include `ember-simple-auth` typescript defs in the `tsconfig.json` under `paths` like this:
+   ```
+    "paths: {
+      "ember-simple-auth/*": [
+        "node_modules/ember-simple-auth"
+      ],
+    }
+   ```
+2. Import the definition for the type that you need where you need it. For eg: If you have a `session-auth.ts` service that uses the `session` service offered by `ember-simple-auth`, you can import the typescript definition for it and use it like this:
+   <br /> <b>session-auth.js</b>
+   ```
+    import { inject as service } from '@ember/service';
+    import type Session from 'ember-simple-auth/services/session';
+
+    interface SessionData = {
+      access_token: String,
+      token_type: String,
+    }
+
+    export default class SessionAuthService extends Service {
+      @service declare session: Session<SessionData>
+    }
+   ```
+
 ### Upgrading from a pre-3.0 release?
 
 The 3.0 release of ember-simple-auth removes previously deprecated code,
