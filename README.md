@@ -122,8 +122,13 @@ ember install ember-simple-auth
     import { inject as service } from '@ember/service';
     import type Session from 'ember-simple-auth/services/session';
 
+    interface SessionData = {
+      access_token: String,
+      token_type: String,
+    }
+
     export default class SessionAuthService extends Service {
-      @service declare session: Session<{}>
+      @service declare session: Session<SessionData>
     }
    ```
 
